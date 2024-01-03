@@ -55,6 +55,25 @@ void checkin(Player_t *list)
    printf("The linked list contains %d nodes.\n", number_list);
 }
 
+void del_top(Player_t **first)
+{
+    Player_t *ptr = *first;
+    *first = (*first)->next;
+    free(ptr);
+}
+
+void del_end(Player_t **first)
+{
+    Player_t *ptr = *first;
+    Player_t *suppr;
+
+    while (ptr->next != NULL) {
+        suppr = ptr;
+        ptr = ptr->next;
+    }
+    suppr->next = NULL;
+    free(ptr);
+}
 
 void inserposit(Player_t **list, int posi, char *name, cat position, int goals, int numero)
 {
@@ -79,11 +98,13 @@ int main(int argc, char const *argv[])
 {
 Player_t *first = NULL;
 add_to_top(&first, "Rashford", GK, 23, 11);
-add_to_top(&first, "Olise", MID, 3, 17);
+// add_to_top(&first, "Olise", MID, 3, 17);
 add_end_list(&first, "Ruud", STK, 45, 10);
 add_end_list(&first, "Tolu",STK, 98, 17);
-inserposit(&first, 3, "Rio", DEF, 7, 5);
-inserposit(&first, 2, "Vidc", DEF, 6, 4);
+// inserposit(&first, 3, "Rio", DEF, 7, 5);
+// inserposit(&first, 2, "Vidc", DEF, 6, 4);
+// del_top(&first);
+del_end(&first);
 checkin(first);
 display(first);
 return 0;
